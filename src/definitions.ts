@@ -1,3 +1,4 @@
 export interface EsimReaderPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  hasEsim(): Promise<{ supported: boolean }>;
+  getEsimInfo(): Promise<{ info: string | null }>;
 }

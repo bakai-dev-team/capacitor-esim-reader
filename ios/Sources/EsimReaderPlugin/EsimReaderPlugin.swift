@@ -1,23 +1,33 @@
-import Foundation
 import Capacitor
+import CoreTelephony
 
-/**
- * Please read the Capacitor iOS Plugin Development Guide
- * here: https://capacitorjs.com/docs/plugins/ios
- */
 @objc(EsimReaderPlugin)
-public class EsimReaderPlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "EsimReaderPlugin"
-    public let jsName = "EsimReader"
-    public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
-    ]
-    private let implementation = EsimReader()
+public class EsimReaderPlugin: CAPPlugin {
+    @objc func hasEsim(_ call: CAPPluginCall) {
+        if #available(iOS 12.0, *) {
+            let networkInfo = CTTelephonyNetworkInfo()
+            if let carriers = networkInfo.serviceSubscriberCellularProviders, carriers.count > 1 {
+                call.resolve(["supported": true])
+                return
+            }
+        }
+        call.resolve(["supported": false])
+    }
 
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve([
-            "value": implementation.echo(value)
-        ])
+    @objc func getEsimInfo(_ call: CAPPluginCall) {
+        if #available(iOS 12.0, *) {
+            let networkInfo = CTTelephonyNetworkInfo()
+            if let carriers = networkInfo.serviceSubscriberCellularProviders {
+                var carrierDescriptions: [String] = []
+                for (key, carrier) in carriers {
+                    if let name = carrier.carrierName {
+                        carrierDescriptions.append("\(key): \(name)")
+                    }
+                }
+                call.resolve(["info": carrierDescriptions.joined(separator: ", ")])
+                return
+            }
+        }
+        call.resolve(["info": nil])
     }
 }
