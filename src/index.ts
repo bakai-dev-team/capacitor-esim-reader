@@ -1,5 +1,4 @@
 import { registerPlugin } from '@capacitor/core';
-
 import type { EsimReaderPlugin } from './definitions';
 
 const EsimReader = registerPlugin<EsimReaderPlugin>('EsimReader', {
