@@ -19,10 +19,10 @@
   "license": "a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yryskeldi0101/E-Sim-Reader.git.git"
+    "url": "git+https://github.com/bakai-dev-team/capacitor-esim-reader.git.git"
   },
   "bugs": {
-    "url": "https://github.com/yryskeldi0101/E-Sim-Reader.git/issues"
+    "url": "https://github.com/bakai-dev-team/capacitor-esim-reader.git/issues"
   },
   "keywords": [
     "capacitor",
