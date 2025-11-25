@@ -1,4 +1,4 @@
-package com.mycompany.plugins.example;
+package kg.bta.plugins.esimreader;
 
 import android.Manifest;
 import android.content.Context;
