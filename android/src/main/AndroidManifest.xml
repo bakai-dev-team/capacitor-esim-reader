@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mycompany.plugins.example">
+          package="kg.bta.plugins.esimreader">
 
     <!-- Только необходимые runtime-разрешения -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
